@@ -48,17 +48,14 @@ if ( ! defined( 'KEI_SLUG' ) ) {
 	define( 'KEI_SLUG', 'kerkenit' );
 }
 
+if ( ! defined( 'KEI_NAME' ) ) {
+	define( 'KEI_NAME', 'kerk-en-it-parish' );
+}
+
 if ( ! defined( 'KEI_LANG' ) ) {
 	define( 'KEI_LANG', basename( dirname(__FILE__) ).'/languages/' );
 }
 load_plugin_textdomain( 'kei-parish', false, KEI_LANG );
-
-require_once( dirname( KEI_FILE) . '/functions.php' );
-require_once( dirname( KEI_FILE) . '/admin/churches.php' );
-require_once( dirname( KEI_FILE) . '/admin/masses.php' );
-require_once( dirname( KEI_FILE) . '/admin/massTypes.php' );
-require_once( dirname( KEI_FILE) . '/widget.php' );
-
 
 class KeiParish {
 	private static $tbl_church = '';
@@ -139,44 +136,53 @@ class KeiParish {
 			CONSTRAINT `" . self::$FK_masses_church . "` FOREIGN KEY (`church_ID`) REFERENCES `" . self::$tbl_church . "` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
 			CONSTRAINT `" . self::$FK_masses_massesType . "` FOREIGN KEY (`massType_ID`) REFERENCES `" . self::$tbl_massesType . "` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-		$sql[] = "INSERT INTO `" . self::$tbl_church . "`
-		(`title`, `address`, `zipcode`, `city`, `diocese`, `country`, `latitude`, `longitude`, `email`, `phone`, `active`, `insertdate`) VALUES
-		('Sint-Christoffelkathedraal', 'Grote Kerkstraat 29', '6041 CR', 'Roermond', 'Bisdom Roermond', 'Nederland', '51.1969917', '5.98527050000007', 'info@kerkenit.nl', '(012) 34 56 78 9', '1', NOW()),
-		('Onze Lieve Vrouwe Munsterkerk', 'Munsterstraat', '6041 EG', 'Roermond', 'Bisdom Roermond', 'Nederland', '51.1936111', '5.988611100000071', 'info@kerkenit.nl', '(012) 34 56 78 9', '1', NOW());";
 
-		$sql_diocese = "INSERT INTO `" . self::$tbl_diocese . "` (`title`, `i18n`, `insertdate`) VALUES ";
-		$cultureDioceses = array(
-			'nl-NL' => array('Aartsbisdom Utrecht', 'Bisdom \'s-Hertogenbosch', 'Bisdom Breda', ' Bisdom Groningen-Leeuwarden', 'Bisdom Haarlem-Amsterdam', 'Bisdom Roermond', 'Bisdom Rotterdam', 'Ordinariaat voor de Ned. Strijdkrachten'),
-			'nl-BE' => array('Aartsbisdom Mechelen-Brussel', 'Bisdom Antwerpen', 'Bisdom Brugge', 'Bisdom Gent', 'Bisdom Hasselt', 'Bisdom bij de Belg. krijgsmacht')
-		);
+		if($wpdb->get_var("SHOW TABLES LIKE '" . self::$tbl_church . "'") !== self::$tbl_church ) :
+			$sql[] = "INSERT INTO `" . self::$tbl_church . "`
+			(`title`, `address`, `zipcode`, `city`, `diocese`, `country`, `latitude`, `longitude`, `email`, `phone`, `active`, `insertdate`) VALUES
+			('Sint-Christoffelkathedraal', 'Grote Kerkstraat 29', '6041 CR', 'Roermond', 'Bisdom Roermond', 'Nederland', '51.1969917', '5.98527050000007', 'info@kerkenit.nl', '(012) 34 56 78 9', '1', NOW()),
+			('Onze Lieve Vrouwe Munsterkerk', 'Munsterstraat', '6041 EG', 'Roermond', 'Bisdom Roermond', 'Nederland', '51.1936111', '5.988611100000071', 'info@kerkenit.nl', '(012) 34 56 78 9', '1', NOW());";
+		endif;
 
-		foreach($cultureDioceses as $i18n => $dioceses) {
-			foreach($dioceses as $diocese) {
-				$sql_diocese .= $wpdb->prepare("(%s, %s, NOW()),", $diocese, $i18n);
+		if($wpdb->get_var("SHOW TABLES LIKE '" . self::$tbl_diocese . "'") !== self::$tbl_diocese ) :
+			$sql_diocese = "INSERT INTO `" . self::$tbl_diocese . "` (`title`, `i18n`, `insertdate`) VALUES ";
+			$cultureDioceses = array(
+				'nl-NL' => array('Aartsbisdom Utrecht', 'Bisdom \'s-Hertogenbosch', 'Bisdom Breda', ' Bisdom Groningen-Leeuwarden', 'Bisdom Haarlem-Amsterdam', 'Bisdom Roermond', 'Bisdom Rotterdam', 'Ordinariaat voor de Ned. Strijdkrachten'),
+				'nl-BE' => array('Aartsbisdom Mechelen-Brussel', 'Bisdom Antwerpen', 'Bisdom Brugge', 'Bisdom Gent', 'Bisdom Hasselt', 'Bisdom bij de Belg. krijgsmacht')
+			);
+
+			foreach($cultureDioceses as $i18n => $dioceses) {
+				foreach($dioceses as $diocese) {
+					$sql_diocese .= $wpdb->prepare("(%s, %s, NOW()),", $diocese, $i18n);
+				}
+	        }
+	        $sql[] = rtrim($sql_diocese, ',') . ';';
+		endif;
+
+		if($wpdb->get_var("SHOW TABLES LIKE '" . self::$tbl_massesType . "'") !== self::$tbl_massesType ) :
+	        $sql_massTypes = "INSERT INTO `" . self::$tbl_massesType . "` (`title`,`insertdate`) VALUES ";
+			$massTypes = array(
+								__('Stille mis', 'kei-parish'),
+								__('Gezongen mis', 'kei-parish'),
+								__('Hoogmis', 'kei-parish'),
+								__('Plechtige Mis', 'kei-parish'),
+								__('Pontificale Mis', 'kei-parish'),
+								__('Eucharistische aanbidding', 'kei-parish'),
+							);
+			foreach($massTypes as $massType) {
+				$sql_massTypes .= $wpdb->prepare("(%s, NOW()),", $massType);
 			}
-        }
-        $sql[] = rtrim($sql_diocese, ',') . ';';
-
-        $sql_massTypes = "INSERT INTO `" . self::$tbl_massesType . "` (`title`,`insertdate`) VALUES ";
-		$massTypes = array(
-							__('Stille mis', 'kei-parish'),
-							__('Gezongen mis', 'kei-parish'),
-							__('Hoogmis', 'kei-parish'),
-							__('Plechtige Mis', 'kei-parish'),
-							__('Pontificale Mis', 'kei-parish'),
-							__('Eucharistische aanbidding', 'kei-parish'),
-						);
-
-		foreach($massTypes as $massType) {
-			$sql_massTypes .= $wpdb->prepare("(%s, NOW()),", $massType);
-		}
-		$sql[] = rtrim($sql_massTypes, ',') . ';';
+			$sql[] = rtrim($sql_massTypes, ',') . ';';
+		endif;
 
 		foreach($sql as $query) {
 			$wpdb->query($query);
 		}
 	}
 	static function deactivation() {
+		return true;
+	}
+	static function uninstall() {
 		self::init();
 		global $wpdb;
 		$sql = array();
@@ -189,14 +195,15 @@ class KeiParish {
 		foreach($sql as $query) {
 			$wpdb->query($query);
 		}
-	}
-	static function uninstall() {
-		global $wpdb;
+
 	}
 }
 register_activation_hook( KEI_FILE, array( 'KeiParish', 'activation' ) );
 register_deactivation_hook( KEI_FILE, array( 'KeiParish', 'deactivation' ) );
-//register_uninstall_hook( KEI_FILE, array( 'KeiParish', 'uninstall' ) );
+register_uninstall_hook( KEI_FILE, array( 'KeiParish', 'uninstall' ) );
+
+
+
 
 function kei_mass_admin_css() {
 	wp_enqueue_style("kei_mass_Stylesheet", plugins_url('admin/stylesheet.css', __FILE__), array(), false, false);
@@ -217,15 +224,23 @@ if (!function_exists('kei_add_menu_items')) {
 
 	}
 }
+require_once( dirname( KEI_FILE) . '/widget.php' );
 
-
-add_action('admin_head', 'kei_mass_admin_css');
-add_action( 'admin_enqueue_scripts', 'kei_admin_enqueue_scripts' );
-add_action('admin_menu', 'kei_add_menu_items');
-
+if (!function_exists('kei_init')) {
+	function kei_init() {
+		require_once( dirname( KEI_FILE) . '/functions.php' );
+		require_once( dirname( KEI_FILE) . '/admin/churches.php' );
+		require_once( dirname( KEI_FILE) . '/admin/masses.php' );
+		require_once( dirname( KEI_FILE) . '/admin/massTypes.php' );	}
+}
 
 function register_kei_parish_widgets() {
     register_widget( 'Kei_MassTimes_Widget' );
 }
-add_action( 'widgets_init', 'register_kei_parish_widgets' );
+
+add_action('init', 'kei_init');
+add_action('admin_head', 'kei_mass_admin_css');
+add_action('admin_enqueue_scripts', 'kei_admin_enqueue_scripts' );
+add_action('admin_menu', 'kei_add_menu_items');
+add_action('widgets_init', 'register_kei_parish_widgets' );
 ?>
