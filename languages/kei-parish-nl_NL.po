@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Kerk en IT Parish\n"
-"POT-Creation-Date: 2015-03-08 18:34+0100\n"
-"PO-Revision-Date: 2015-03-08 18:34+0100\n"
-"Last-Translator: Marco van 't Klooster <info@kerkenit.nl>\n"
+"POT-Creation-Date: 2015-03-11 14:08+0100\n"
+"PO-Revision-Date: 2015-03-11 14:08+0100\n"
+"Last-Translator: Marco van 't Klooster <marco@eyefactory.nl>\n"
 "Language-Team: Marco van 't Klooster <info@kerkenit.nl>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
@@ -344,21 +344,57 @@ msgstr "Mis soorten"
 msgid "Show your masses times"
 msgstr "Toon de mistijden"
 
-#: widget.php:33
-msgid "Hello, World!"
-msgstr ""
+#: widget.php:50
+msgid "Every"
+msgstr "Elke"
 
-#: widget.php:46
+#: widget.php:50
+msgid "at"
+msgstr "om"
+
+#: widget.php:60
+msgid "monday"
+msgstr "maandag"
+
+#: widget.php:62
+msgid "tuesday"
+msgstr "dinsdag"
+
+#: widget.php:64
+msgid "wednesday"
+msgstr "woensdag"
+
+#: widget.php:66
+msgid "thursday"
+msgstr "donderdag"
+
+#: widget.php:68
+msgid "friday"
+msgstr "vrijdag"
+
+#: widget.php:70
+msgid "saturday"
+msgstr "zaterdag"
+
+#: widget.php:72
+msgid "sunday"
+msgstr "zondag"
+
+#: widget.php:91
 msgid "Masses times"
 msgstr "Mis tijden"
 
-#: widget.php:50
+#: widget.php:95
 msgid "Title:"
 msgstr "Titel:"
 
-#: widget.php:54
+#: widget.php:99
 msgid "Church:"
 msgstr "Kerk:"
+
+#: widget.php:103
+msgid "All churches:"
+msgstr "Kerkgebouwen"
 
 #~ msgid "Mass not added."
 #~ msgstr "Mis is niet toegevoegd."

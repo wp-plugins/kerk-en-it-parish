@@ -41,13 +41,15 @@ class Kei_MassTimes_Widget extends WP_Widget {
 		
 		foreach($churches as $church)
 		{
-			printf('<h4>%s</h4>', $church->title);
-			$masses = $wpdb->get_results("SELECT `ID`, `dayOfWeek` FROM `" . $wpdb->prefix . 'kei_masses' . "` WHERE `active` = 1 AND church_ID = " . $church->ID . " ORDER BY `dayOfWeek`;", OBJECT );
-			foreach($masses as $mass)
-			{
-				
-				printf('<p>%s</p>', $this->getDayOfWeek($mass->dayOfWeek));
-			}
+			$masses = $wpdb->get_results("SELECT `title`, `dayOfWeek`, `hour`, `minute` FROM `" . $wpdb->prefix . 'kei_masses' . "` INNER JOIN `" . $wpdb->prefix . 'kei_massesType' . "` ON `" . $wpdb->prefix . 'kei_masses' . "`.`massType_ID` = `" . $wpdb->prefix . 'kei_massesType' . "`.`ID` WHERE `" . $wpdb->prefix . 'kei_masses' . "`.`active` = 1 AND church_ID = " . $church->ID . " ORDER BY `dayOfWeek`;", OBJECT );
+			if(count($masses) > 0) :
+				printf('<strong>%s</strong>', $church->title);
+				foreach($masses as $mass)
+				{
+					
+					printf('<p><em>%s:</em><br />%s %s %s %s</p>', $mass->title, __('Every', 'kei-parish'), $this->getDayOfWeek($mass->dayOfWeek), __('at', 'kei-parish'), $this->getTimeOfDay($mass->hour, $mass->minute));
+				}
+			endif;
 		}
 		echo $args['after_widget'];
 	}
@@ -55,22 +57,26 @@ class Kei_MassTimes_Widget extends WP_Widget {
 	private function getDayOfWeek($i) {
 		switch($i) {
 			case 1:
-				return __('Monday', 'kei-parish');
+				return __('monday', 'kei-parish');
 			case 2:
-				return __('Tuesday', 'kei-parish');
+				return __('tuesday', 'kei-parish');
 			case 3:
-				return __('Wednesday', 'kei-parish');
+				return __('wednesday', 'kei-parish');
 			case 4:
-				return __('Thursday', 'kei-parish');
+				return __('thursday', 'kei-parish');
 			case 5:
-				return __('Friday', 'kei-parish');
+				return __('friday', 'kei-parish');
 			case 6:
-				return __('Saturday', 'kei-parish');
+				return __('saturday', 'kei-parish');
 			case 7:
-				return __('Sunday', 'kei-parish');
+				return __('sunday', 'kei-parish');
 			default:
 				return '';
 		}
+	}
+	
+	private function getTimeOfDay($hour, $minutes) {
+		return sprintf('%02d:%02d', $hour, $minutes);
 	}
 
 	/**
