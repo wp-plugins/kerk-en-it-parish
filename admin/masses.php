@@ -282,12 +282,11 @@ if (!function_exists('kei_mass_render_list_page')) {
 					$church_ID = kei_post_val('church_ID');
 					$massType_ID = kei_post_val('massType_ID');
 					$dayOfWeek = kei_post_val('dayOfWeek');
-					$hour = kei_post_val('hour');
-					$minute = kei_post_val('minute');
+					$hour = (int)kei_post_val('hour');
+					$minute = (int)kei_post_val('minute');
 					$note = kei_post_val('note');
 					if($id === null) :
 						$wpdb->query($wpdb->prepare("INSERT INTO `" . $MassListTable->table_name . "` (`church_ID`, `massType_ID`, `dayOfWeek`, `hour`, `minute`, `note`, `insertdate`) VALUES (%d, %d, %d, %d, %d, %s, NOW())", $church_ID, $massType_ID, $dayOfWeek, $hour, $minute, $note));
-						$id = $wpdb->insert_id;
 						?>
 						<div id="message" class="updated">
 					        <p><strong><?php _e('Mass is added.', 'kei-parish') ?></strong></p>
@@ -300,8 +299,9 @@ if (!function_exists('kei_mass_render_list_page')) {
 					        <p><strong><?php _e('Mass is changed.', 'kei-parish') ?></strong></p>
 					    </div>
 						<?php
+						$data = array(0 => (object) array('ID' => $id, 'church_ID' => $church_ID, 'massType_ID' => $massType_ID, 'dayOfWeek' => $dayOfWeek, 'hour' => $hour, 'minute' => $minute, 'note' => $note) );
+
 					endif;
-					$data = array(0 => (object) array('ID' => $id, 'church_ID' => $church_ID, 'massType_ID' => $massType_ID, 'dayOfWeek' => $dayOfWeek, 'hour' => $hour, 'minute' => $minute, 'note' => $note) );
 				endif;
 			else :
 				if($id != 0) :
@@ -390,7 +390,7 @@ if (!function_exists('kei_mass_render_list_page')) {
 								echo '<select id="minute" name="minute" style="width:400px;">';
 								for($i = 0; $i <= 60; $i+=5)
 								{
-									echo '<option value="' . $i . '"' . ((int)$data[0]->hour == $i ? ' selected="selected"' : '') . '>' . $i . '</option>';
+									echo '<option value="' . $i . '"' . ((int)$data[0]->minute == $i ? ' selected="selected"' : '') . '>' . $i . '</option>';
 								}
 								echo '</select>';
 							?>
