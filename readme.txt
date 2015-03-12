@@ -6,7 +6,7 @@ Plugin URI: http://www.kerkenit.nl/plugins/parish
 Tags: kerk, mistijden, kerkgebouwen, ledenadministratie, parochie, church, masses, church buildings, parish, 
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 0.1.1
+Stable tag: 0.2.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,10 @@ You can help us by providing data of your local dioceses.
 Also we are looking for translators. Please contact us, and we will add support for your country.
 
 == Changelog ==
+
+= 0.2.0 =
+* Fixed uninstall hook. Fixed double data insert on activation.
+
 = 0.1.1 =
 * Added mass times and mass types to the widget
 
