@@ -137,13 +137,6 @@ class KeiParish {
 			CONSTRAINT `" . self::$FK_masses_massesType . "` FOREIGN KEY (`massType_ID`) REFERENCES `" . self::$tbl_massesType . "` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
 
-		if($wpdb->get_var("SHOW TABLES LIKE '" . self::$tbl_church . "'") !== self::$tbl_church ) :
-			$sql[] = "INSERT INTO `" . self::$tbl_church . "`
-			(`title`, `address`, `zipcode`, `city`, `diocese`, `country`, `latitude`, `longitude`, `email`, `phone`, `active`, `insertdate`) VALUES
-			('Sint-Christoffelkathedraal', 'Grote Kerkstraat 29', '6041 CR', 'Roermond', 'Bisdom Roermond', 'Nederland', '51.1969917', '5.98527050000007', 'info@kerkenit.nl', '(012) 34 56 78 9', '1', NOW()),
-			('Onze Lieve Vrouwe Munsterkerk', 'Munsterstraat', '6041 EG', 'Roermond', 'Bisdom Roermond', 'Nederland', '51.1936111', '5.988611100000071', 'info@kerkenit.nl', '(012) 34 56 78 9', '1', NOW());";
-		endif;
-
 		if($wpdb->get_var("SHOW TABLES LIKE '" . self::$tbl_diocese . "'") !== self::$tbl_diocese ) :
 			$sql_diocese = "INSERT INTO `" . self::$tbl_diocese . "` (`title`, `i18n`, `insertdate`) VALUES ";
 			$cultureDioceses = array(

@@ -1,14 +1,12 @@
 === Kerk en IT Parish ===
 Contributors: kerkenit
-Author: Kerk en IT
-Author URI: http://www.kerkenit.nl
-Plugin URI: http://www.kerkenit.nl/plugins/parish
+Donate link: http://www.kerkenit.nl
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: kerk, mistijden, kerkgebouwen, ledenadministratie, parochie, church, masses, church buildings, parish, 
 Requires at least: 3.8
 Tested up to: 4.1
-Stable tag: 0.2.0
-License: GPLv2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Stable tag: 0.2.1
 
 This plugin will extend your parish website.
 
@@ -45,11 +43,20 @@ Also we are looking for translators. Please contact us, and we will add support 
 
 == Changelog ==
 
+= 0.2.1 =
+
+* Removed sample data
+* Fixed issue of adding masses in batch
+* Fixed issue with adding hour
+
 = 0.2.0 =
+
 * Fixed uninstall hook. Fixed double data insert on activation.
 
 = 0.1.1 =
+
 * Added mass times and mass types to the widget
 
 = 0.1 =
+
 * Introduction of plugin
