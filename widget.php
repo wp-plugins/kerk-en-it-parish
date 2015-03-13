@@ -10,11 +10,12 @@ class Kei_MassTimes_Widget extends WP_Widget {
 	function __construct() {
 
 		load_plugin_textdomain( 'kei-parish', false, KEI_LANG);
-		parent::__construct(
-			'kei_widget_masses', // Base ID
-			__( 'All Masses', 'kei-parish' ), // Name
-			array( 'description' => __( 'This widget will show all mass times. This is recommended if your primary target audience are the parishioners.', 'kei-parish' ), ) // Args
-		);
+		$widget_ops = array('classname' => 'kei_widget_masses', 'description' => __( 'This widget will show all mass times. This is recommended if your primary target audience are the parishioners.', 'kei-parish' ));
+        parent::__construct(
+        	'kei_widget_masses', // Base ID
+        	__( 'All Masses', 'kei-parish' ), // Name
+        	$widget_ops // Args
+        );
 	}
 
 	/**
@@ -28,64 +29,20 @@ class Kei_MassTimes_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		global $wpdb;
 		echo $args['before_widget'];
-		if ( ! empty( $instance['title'] ) ) {
+		if ( ! empty( $instance['title'] ) ) :
 			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
-		}
-		$church_ID = (int)$instance['church_ID'];
-		$and = '';
-		if($church_ID > 0) {
-			$and = 'AND `ID` = ' . $church_ID . '';
-		}
-		$churches = $wpdb->get_results("SELECT `ID`, `title` FROM `" . $wpdb->prefix . 'kei_church' . "` WHERE `active` = 1 $and ORDER BY `title`;", OBJECT );
+		endif;
+		$subtitle = '';
+		if ( ! empty( $instance['subtitle'] ) ) :
+			$subtitle = sprintf(' subtitle="%s"', $instance['subtitle']);
+		endif;
+		if(isset($instance['church_ID']) && !empty($instance['church_ID']) && is_numeric($instance['church_ID'])) :
+			echo do_shortcode( '[parish-all-masses church_id="' . $instance['church_ID'] . '"' . $subtitle . ']' );
+		else :
+			echo do_shortcode( '[parish-all-masses' . $subtitle . ']' );
+		endif;
 
-
-		foreach($churches as $church)
-		{
-			$masses = $wpdb->get_results("SELECT `title`, `dayOfWeek`, `hour`, `minute` FROM `" . $wpdb->prefix . 'kei_masses' . "` INNER JOIN `" . $wpdb->prefix . 'kei_massesType' . "` ON `" . $wpdb->prefix . 'kei_masses' . "`.`massType_ID` = `" . $wpdb->prefix . 'kei_massesType' . "`.`ID` WHERE `" . $wpdb->prefix . 'kei_masses' . "`.`active` = 1 AND church_ID = " . $church->ID . " ORDER BY `dayOfWeek` ASC, `hour` ASC, `minute` ASC;", OBJECT );
-			if(count($masses) > 0) :
-				printf('<strong>%s</strong>', $church->title);
-				$dayOfWeek = 0;
-				print('<p>');
-				foreach($masses as $mass)
-				{
-					if($dayOfWeek !== $mass->dayOfWeek) :
-						if($dayOfWeek !== 0) :
-							print('</p><p>');
-						endif;
-						printf('%s %s<br />', __('Every', 'kei-parish'), $this->getDayOfWeek($mass->dayOfWeek));
-					endif;
-					printf('<em>%s %s %s</em><br />', $mass->title, __('at', 'kei-parish'), $this->getTimeOfDay($mass->hour, $mass->minute));
-					$dayOfWeek = $mass->dayOfWeek;
-				}
-				print('</p>');
-			endif;
-		}
 		echo $args['after_widget'];
-	}
-
-	private function getDayOfWeek($i) {
-		switch($i) {
-			case 1:
-				return __('monday', 'kei-parish');
-			case 2:
-				return __('tuesday', 'kei-parish');
-			case 3:
-				return __('wednesday', 'kei-parish');
-			case 4:
-				return __('thursday', 'kei-parish');
-			case 5:
-				return __('friday', 'kei-parish');
-			case 6:
-				return __('saturday', 'kei-parish');
-			case 7:
-				return __('sunday', 'kei-parish');
-			default:
-				return '';
-		}
-	}
-
-	private function getTimeOfDay($hour, $minutes) {
-		return sprintf('%02d:%02d', $hour, $minutes);
 	}
 
 	/**
@@ -98,11 +55,16 @@ class Kei_MassTimes_Widget extends WP_Widget {
 	public function form( $instance ) {
 		global $wpdb;
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Masses times', 'kei-parish' );
+		$subtitle = ! empty( $instance['subtitle'] ) ? $instance['subtitle'] : '';
 		$church_ID = ! empty( $instance['church_ID'] ) ? $instance['church_ID'] : 0;
 		?>
 		<p>
 		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+		</p>
+		<p>
+		<label for="<?php echo $this->get_field_id( 'subtitle' ); ?>"><?php _e( 'Subtitle:', 'kei-parish' ); ?></label>
+		<textarea class="widefat" rows="5" id="<?php echo $this->get_field_id( 'subtitle' ); ?>" name="<?php echo $this->get_field_name( 'subtitle' ); ?>"><?php echo esc_attr( $subtitle ); ?></textarea>
 		</p>
 		<p>
 		<label for="<?php echo $this->get_field_id( 'church_ID' ); ?>"><?php _e( 'Church:', 'kei-parish' ); ?></label>
@@ -111,8 +73,7 @@ class Kei_MassTimes_Widget extends WP_Widget {
 			$churches = $wpdb->get_results("SELECT `ID`, `title` FROM `" . $wpdb->prefix . 'kei_church' . "` WHERE `active` = 1 ORDER BY `title`;", OBJECT );
 			echo '<option value="0"' . ((int)esc_attr( $church_ID ) == 0 ? ' selected="selected"' : '') . '>' . __( 'All churches:', 'kei-parish' ) . '</option>';
 
-			foreach($churches as $church)
-			{
+			foreach($churches as $church) {
 				echo '<option value="' . $church->ID . '"' . ((int)esc_attr( $church_ID ) == $church->ID ? ' selected="selected"' : '') . '>' . $church->title . '</option>';
 			}
 			echo '</select>';
@@ -134,6 +95,7 @@ class Kei_MassTimes_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+		$instance['subtitle'] = ( ! empty( $new_instance['subtitle'] ) ) ? strip_tags( $new_instance['subtitle'] ) : '';
 		$instance['church_ID'] = ( ! empty( $new_instance['church_ID'] ) ) ? strip_tags( $new_instance['church_ID'] ) : '';
 		return $instance;
 	}

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Kerk en IT Parish\n"
-"POT-Creation-Date: 2015-03-13 12:27+0100\n"
-"PO-Revision-Date: 2015-03-13 12:27+0100\n"
+"POT-Creation-Date: 2015-03-13 14:15+0100\n"
+"PO-Revision-Date: 2015-03-13 14:15+0100\n"
 "Last-Translator: Marco van 't Klooster <info@kerkenit.nl>\n"
 "Language-Team: Marco van 't Klooster <info@kerkenit.nl>\n"
 "Language: nl_NL\n"
@@ -239,6 +239,34 @@ msgstr "Opslaan als nieuw"
 msgid "Masses"
 msgstr "Missen"
 
+#: functions.php:104
+msgid "monday"
+msgstr "maandag"
+
+#: functions.php:106
+msgid "tuesday"
+msgstr "dinsdag"
+
+#: functions.php:108
+msgid "wednesday"
+msgstr "woensdag"
+
+#: functions.php:110
+msgid "thursday"
+msgstr "donderdag"
+
+#: functions.php:112
+msgid "friday"
+msgstr "vrijdag"
+
+#: functions.php:114
+msgid "saturday"
+msgstr "zaterdag"
+
+#: functions.php:116
+msgid "sunday"
+msgstr "zondag"
+
 #: kei-parish.php:87
 msgid "Address of the church"
 msgstr "Adres van de kerk"
@@ -340,11 +368,15 @@ msgstr "Parochie"
 msgid "Mass types"
 msgstr "Mis soorten"
 
-#: widget.php:15
-msgid "All Masses"
-msgstr "Alle Missen"
+#: shortcode.php:45
+msgid "Every"
+msgstr "Elke"
 
-#: widget.php:16
+#: shortcode.php:47
+msgid "at"
+msgstr "om"
+
+#: widget.php:13
 msgid ""
 "This widget will show all mass times. This is recommended if your primary "
 "target audience are the parishioners."
@@ -352,55 +384,27 @@ msgstr ""
 "Deze widget zal alle mistijden tonen. Dit wordt aanbevolen als je primaire "
 "doelgroep de parochianen zijn."
 
-#: widget.php:55
-msgid "Every"
-msgstr "Elke"
+#: widget.php:16
+msgid "All Masses"
+msgstr "Alle Missen"
 
 #: widget.php:57
-msgid "at"
-msgstr "om"
-
-#: widget.php:69
-msgid "monday"
-msgstr "maandag"
-
-#: widget.php:71
-msgid "tuesday"
-msgstr "dinsdag"
-
-#: widget.php:73
-msgid "wednesday"
-msgstr "woensdag"
-
-#: widget.php:75
-msgid "thursday"
-msgstr "donderdag"
-
-#: widget.php:77
-msgid "friday"
-msgstr "vrijdag"
-
-#: widget.php:79
-msgid "saturday"
-msgstr "zaterdag"
-
-#: widget.php:81
-msgid "sunday"
-msgstr "zondag"
-
-#: widget.php:100
 msgid "Masses times"
 msgstr "Mis tijden"
 
-#: widget.php:104
+#: widget.php:62
 msgid "Title:"
 msgstr "Titel:"
 
-#: widget.php:108
+#: widget.php:66
+msgid "Subtitle:"
+msgstr "Ondertitel:"
+
+#: widget.php:70
 msgid "Church:"
 msgstr "Kerk:"
 
-#: widget.php:112
+#: widget.php:74
 msgid "All churches:"
 msgstr "Alle Kerkgebouwen:"
 

@@ -217,6 +217,7 @@ if (!function_exists('kei_add_menu_items')) {
 
 	}
 }
+require_once( dirname( KEI_FILE) . '/shortcode.php' );
 require_once( dirname( KEI_FILE) . '/widget.php' );
 
 if (!function_exists('kei_init')) {

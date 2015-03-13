@@ -97,4 +97,32 @@
 			return $active_tld;
 		}
 	}
+	if (!function_exists('getDayOfWeek')) {
+		function getDayOfWeek($i) {
+			switch($i) {
+				case 1:
+					return __('monday', 'kei-parish');
+				case 2:
+					return __('tuesday', 'kei-parish');
+				case 3:
+					return __('wednesday', 'kei-parish');
+				case 4:
+					return __('thursday', 'kei-parish');
+				case 5:
+					return __('friday', 'kei-parish');
+				case 6:
+					return __('saturday', 'kei-parish');
+				case 7:
+					return __('sunday', 'kei-parish');
+				default:
+					return '';
+			}
+		}
+	}
+
+	if (!function_exists('getTimeOfDayOfWeek')) {
+		function getTimeOfDayOfWeek($hour, $minutes) {
+			return sprintf('%02d:%02d', $hour, $minutes);
+		}
+	}
 ?>
