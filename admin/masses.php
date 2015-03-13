@@ -299,9 +299,8 @@ if (!function_exists('kei_mass_render_list_page')) {
 					        <p><strong><?php _e('Mass is changed.', 'kei-parish') ?></strong></p>
 					    </div>
 						<?php
-						$data = array(0 => (object) array('ID' => $id, 'church_ID' => $church_ID, 'massType_ID' => $massType_ID, 'dayOfWeek' => $dayOfWeek, 'hour' => $hour, 'minute' => $minute, 'note' => $note) );
-
 					endif;
+					$data = array(0 => (object) array('ID' => $id, 'church_ID' => $church_ID, 'massType_ID' => $massType_ID, 'dayOfWeek' => $dayOfWeek, 'hour' => $hour, 'minute' => $minute, 'note' => $note) );
 				endif;
 			else :
 				if($id != 0) :
@@ -321,7 +320,7 @@ if (!function_exists('kei_mass_render_list_page')) {
 								<?php _e('Church', 'kei-parish'); ?>:
 							</label>
 							<?php
-								echo '<select id="church_ID" name="church_ID" style="width:400px;">';
+								echo '<select id="church_ID" name="church_ID" style="width:367px;">';
 									$churches = $wpdb->get_results("SELECT `ID`, `title` FROM `" . $wpdb->prefix . 'kei_church' . "` WHERE `active` = 1 ORDER BY `title`;", OBJECT );
 									foreach($churches as $church)
 									{
@@ -335,7 +334,7 @@ if (!function_exists('kei_mass_render_list_page')) {
 								<?php _e('Mass type', 'kei-parish'); ?>:
 							</label>
 							<?php
-								echo '<select id="massType_ID" name="massType_ID" style="width:400px;">';
+								echo '<select id="massType_ID" name="massType_ID" style="width:367px;">';
 								$massTypes = $wpdb->get_results("SELECT `ID`, `title` FROM `" . $wpdb->prefix . 'kei_massesType' . "` WHERE `active` = 1 ORDER BY `title`;", OBJECT );
 								foreach($massTypes as $massType)
 								{
@@ -344,12 +343,12 @@ if (!function_exists('kei_mass_render_list_page')) {
 								echo '</select>';
 							?>
 						</div>
-						<div>
+						<div style="width:275px;float:left;">
 							<label for="dayOfWeek">
 								<?php _e('Day of week', 'kei-parish'); ?>:
 							</label>
 							<?php
-								echo '<select id="dayOfWeek" name="dayOfWeek" style="width:400px;">';
+								echo '<select id="dayOfWeek" name="dayOfWeek" style="width:150px;">';
 
 								$days = array(
 									0 => (object) array('ID' => 1, 'title' => __('Monday', 'kei-parish')),
@@ -365,48 +364,41 @@ if (!function_exists('kei_mass_render_list_page')) {
 									echo '<option value="' . $day->ID . '"' . ($data[0]->dayOfWeek == $day->ID ? ' selected="selected"' : '') . '>' . $day->title . '</option>';
 								}
 								echo '</select>';
-							?>
+								?>
 						</div>
-
-						<div>
-							<label for="hour">
-								<?php _e('Hour', 'kei-parish'); ?>:
-							</label>
-							<?php
-								echo '<select id="hour" name="hour" style="width:400px;">';
-								for($i = 0; $i <= 23; $i++)
-								{
-									echo '<option value="' . $i . '"' . ((int)$data[0]->hour == $i ? ' selected="selected"' : '') . '>' . $i . '</option>';
-								}
-								echo '</select>';
-							?>
-						</div>
-
-						<div>
-							<label for="hour">
-								<?php _e('Minute', 'kei-parish'); ?>:
-							</label>
-							<?php
-								echo '<select id="minute" name="minute" style="width:400px;">';
-								for($i = 0; $i <= 60; $i+=5)
-								{
-									echo '<option value="' . $i . '"' . ((int)$data[0]->minute == $i ? ' selected="selected"' : '') . '>' . $i . '</option>';
-								}
-								echo '</select>';
-							?>
+						<div style="float: left;width: 225px;clear: none;">
+								<label for="hour" style="width: 50px;">
+									<?php _e('Time', 'kei-parish'); ?>:
+								</label>
+								<?php
+									echo '<select id="hour" name="hour" style="width:75px;">';
+									for($i = 0; $i <= 23; $i++)
+									{
+										echo '<option value="' . $i . '"' . ((int)$data[0]->hour == $i ? ' selected="selected"' : '') . '>' . sprintf('%02d', $i) . '</option>';
+									}
+									echo '</select>';
+								?>
+								<?php
+									echo '<select id="minute" name="minute" style="width:75px;">';
+									for($i = 0; $i <= 60; $i+=5)
+									{
+										echo '<option value="' . $i . '"' . ((int)$data[0]->minute == $i ? ' selected="selected"' : '') . '>' . sprintf('%02d', $i) . '</option>';
+									}
+									echo '</select>';
+								?>
 						</div>
 						<div>
 							<label for="note">
 								<?php _e('note', 'kei-parish'); ?>:
 							</label>
-							<input type="text" name="note" size="30" value="<?php echo $data[0]->note; ?>" id="note" spellcheck="true" autocomplete="on">
+							<input type="text" name="note" size="30" value="<?php echo $data[0]->note; ?>" id="note" spellcheck="true" autocomplete="on" style="width:367px;">
 						</div>
 					</div>
 					<div style="clear:both;">
 
 						<?php
 							$other_attributes = array( 'id' => 'mass' );
-							submit_button( (empty($data[0]->ID) ? __('Save', 'kei-parish') : __('Save Changes', 'kei-parish') ), 'primary', 'kei-save-mass', false, $other_attributes );
+							submit_button( (empty($data[0]->ID) ? __('Save as new', 'kei-parish') : __('Save Changes', 'kei-parish') ), 'primary', 'kei-save-mass', false, $other_attributes );
 							echo '&nbsp;&nbsp;';
 							submit_button( __('Reset', 'kei-parish'), 'secondary', 'kei-reset-mass', false);
 						?>

@@ -12,8 +12,8 @@ class Kei_MassTimes_Widget extends WP_Widget {
 		load_plugin_textdomain( 'kei-parish', false, KEI_LANG);
 		parent::__construct(
 			'kei_widget_masses', // Base ID
-			__( 'Masses', 'kei-parish' ), // Name
-			array( 'description' => __( 'Show your masses times', 'kei-parish' ), ) // Args
+			__( 'All Masses', 'kei-parish' ), // Name
+			array( 'description' => __( 'This widget will show all mass times. This is recommended if your primary target audience are the parishioners.', 'kei-parish' ), ) // Args
 		);
 	}
 
@@ -37,23 +37,32 @@ class Kei_MassTimes_Widget extends WP_Widget {
 			$and = 'AND `ID` = ' . $church_ID . '';
 		}
 		$churches = $wpdb->get_results("SELECT `ID`, `title` FROM `" . $wpdb->prefix . 'kei_church' . "` WHERE `active` = 1 $and ORDER BY `title`;", OBJECT );
-		
-		
+
+
 		foreach($churches as $church)
 		{
-			$masses = $wpdb->get_results("SELECT `title`, `dayOfWeek`, `hour`, `minute` FROM `" . $wpdb->prefix . 'kei_masses' . "` INNER JOIN `" . $wpdb->prefix . 'kei_massesType' . "` ON `" . $wpdb->prefix . 'kei_masses' . "`.`massType_ID` = `" . $wpdb->prefix . 'kei_massesType' . "`.`ID` WHERE `" . $wpdb->prefix . 'kei_masses' . "`.`active` = 1 AND church_ID = " . $church->ID . " ORDER BY `dayOfWeek`;", OBJECT );
+			$masses = $wpdb->get_results("SELECT `title`, `dayOfWeek`, `hour`, `minute` FROM `" . $wpdb->prefix . 'kei_masses' . "` INNER JOIN `" . $wpdb->prefix . 'kei_massesType' . "` ON `" . $wpdb->prefix . 'kei_masses' . "`.`massType_ID` = `" . $wpdb->prefix . 'kei_massesType' . "`.`ID` WHERE `" . $wpdb->prefix . 'kei_masses' . "`.`active` = 1 AND church_ID = " . $church->ID . " ORDER BY `dayOfWeek` ASC, `hour` ASC, `minute` ASC;", OBJECT );
 			if(count($masses) > 0) :
 				printf('<strong>%s</strong>', $church->title);
+				$dayOfWeek = 0;
+				print('<p>');
 				foreach($masses as $mass)
 				{
-					
-					printf('<p><em>%s:</em><br />%s %s %s %s</p>', $mass->title, __('Every', 'kei-parish'), $this->getDayOfWeek($mass->dayOfWeek), __('at', 'kei-parish'), $this->getTimeOfDay($mass->hour, $mass->minute));
+					if($dayOfWeek !== $mass->dayOfWeek) :
+						if($dayOfWeek !== 0) :
+							print('</p><p>');
+						endif;
+						printf('%s %s<br />', __('Every', 'kei-parish'), $this->getDayOfWeek($mass->dayOfWeek));
+					endif;
+					printf('<em>%s %s %s</em><br />', $mass->title, __('at', 'kei-parish'), $this->getTimeOfDay($mass->hour, $mass->minute));
+					$dayOfWeek = $mass->dayOfWeek;
 				}
+				print('</p>');
 			endif;
 		}
 		echo $args['after_widget'];
 	}
-	
+
 	private function getDayOfWeek($i) {
 		switch($i) {
 			case 1:
@@ -74,7 +83,7 @@ class Kei_MassTimes_Widget extends WP_Widget {
 				return '';
 		}
 	}
-	
+
 	private function getTimeOfDay($hour, $minutes) {
 		return sprintf('%02d:%02d', $hour, $minutes);
 	}

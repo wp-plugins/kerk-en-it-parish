@@ -3,7 +3,7 @@ Contributors: kerkenit
 Donate link: http://www.kerkenit.nl
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: kerk, mistijden, kerkgebouwen, ledenadministratie, parochie, church, masses, church buildings, parish, 
+Tags: kerk, mistijden, kerkgebouwen, ledenadministratie, parochie, church, masses, church buildings, parish,
 Requires at least: 3.8
 Tested up to: 4.1
 Stable tag: 0.2.1
@@ -42,6 +42,11 @@ You can help us by providing data of your local dioceses.
 Also we are looking for translators. Please contact us, and we will add support for your country.
 
 == Changelog ==
+
+= 0.3.0 =
+
+* Improved widget when the are multiple masses on the same day in the same church.
+* Redesigned and improved the admin form for adding masses.
 
 = 0.2.1 =
 
