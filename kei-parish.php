@@ -53,7 +53,8 @@ if ( ! defined( 'KEI_NAME' ) ) {
 }
 
 if ( ! defined( 'KEI_LANG' ) ) {
-	define( 'KEI_LANG', basename( dirname(__FILE__) ).'/languages/' );
+	//define( 'KEI_LANG', basename( dirname(__FILE__) ).'/languages/' );
+	define( 'KEI_LANG', KEI_NAME . '/languages/' );
 }
 load_plugin_textdomain( 'kei-parish', false, KEI_LANG );
 
@@ -209,7 +210,7 @@ function kei_admin_enqueue_scripts($hook) {
 if (!function_exists('kei_add_menu_items')) {
 
 	function kei_add_menu_items() {
-		add_menu_page(__('Parish', 'kei-parish'), __('Parish', 'kei-parish'), 'activate_plugins', KEI_SLUG, 'kei_church_render_list_page', KEI_URL . '/images/icon.png', 90);
+		add_menu_page(__('Parish', 'kei-parish'), __('Parish', 'kei-parish'), 'activate_plugins', KEI_SLUG, 'kei_dashboard_render_list_page', KEI_URL . '/images/icon.png', 90);
 
 		add_submenu_page( KEI_SLUG, __('Churches', 'kei-parish'), __('Churches', 'kei-parish'), 'manage_options', 'kerkenit-churches', 'kei_church_render_list_page');
 		add_submenu_page( KEI_SLUG, __('Masses', 'kei-parish'), __('Masses', 'kei-parish'), 'manage_options', 'kerkenit-masses', 'kei_mass_render_list_page');
@@ -219,17 +220,21 @@ if (!function_exists('kei_add_menu_items')) {
 }
 require_once( dirname( KEI_FILE) . '/shortcode.php' );
 require_once( dirname( KEI_FILE) . '/widget.php' );
+require_once( dirname( KEI_FILE) . '/shortcodes/upcoming_mass.php' );
+require_once( dirname( KEI_FILE) . '/widgets/upcoming_mass.php' );
 
 if (!function_exists('kei_init')) {
 	function kei_init() {
 		require_once( dirname( KEI_FILE) . '/functions.php' );
+		require_once( dirname( KEI_FILE) . '/admin/dashboard.php' );
 		require_once( dirname( KEI_FILE) . '/admin/churches.php' );
 		require_once( dirname( KEI_FILE) . '/admin/masses.php' );
 		require_once( dirname( KEI_FILE) . '/admin/massTypes.php' );	}
 }
 
 function register_kei_parish_widgets() {
-    register_widget( 'Kei_MassTimes_Widget' );
+    register_widget( 'Kei_AllMassTimes_Widget' );
+    register_widget( 'Kei_UpcommingMassTimes_Widget' );
 }
 
 add_action('init', 'kei_init');

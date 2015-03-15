@@ -42,6 +42,8 @@ class KEI_Masses_Table extends WP_List_Table {
 				}
 			case 'address':
 				return str_replace(', , ', __('No address found', 'kei-parish'), $item->$column_name);
+			case 'massTime':
+				return sprintf('%s %s %s', ucfirst(getDayOfWeekPlural($item->dayOfWeek)), __('at', 'kei-parish'), getTimeOfDayOfWeek($item->hour, $item->minute));
 			case 'date':
 				return __date($item->$column_name);
 			default:
@@ -85,6 +87,7 @@ class KEI_Masses_Table extends WP_List_Table {
 			'cb'			=> '<input type="checkbox" />',
 			'title'		=> __('Church', 'kei-parish'),
 			'massType_ID'	=> __('Mass type', 'kei-parish'),
+			'massTime'	=> __('Mass time', 'kei-parish'),
 			'date'			=> __('Date', 'kei-parish')
 		);
 		return $columns;
@@ -95,6 +98,7 @@ class KEI_Masses_Table extends WP_List_Table {
 		$sortable_columns = array (
 			'title'		=> array('church_ID', false), //true means it's already sorted
 			'massType_ID'	=> array('massType_ID', false),
+			'massTime'		=> array('dayOfWeek', true),
 			'date'			=> array('date', false)
 		);
 		return $sortable_columns;
@@ -179,7 +183,7 @@ class KEI_Masses_Table extends WP_List_Table {
 		/**
 		 * First, lets decide how many records per page to show
 		 */
-		$per_page = 5;
+		$per_page = 10;
 
 
 		/**
@@ -209,8 +213,15 @@ class KEI_Masses_Table extends WP_List_Table {
 		 */
 		$this->process_bulk_action();
 
-
-		$data = $wpdb->get_results("SELECT ID, `church_ID`, `massType_ID`, `massType_ID`, `dayOfWeek`, `hour`, `minute`, IFNULL(`updatedate`,`insertdate`) AS date, `active` FROM `" . $this->table_name . "`");
+		$sql = "SELECT ID, `church_ID`, `massType_ID`, `massType_ID`, `dayOfWeek`, `hour`, `minute`, IFNULL(`updatedate`,`insertdate`) AS date, `active` FROM `" . $this->table_name . "`";
+		if(isset($_REQUEST['orderby']) && isset($_REQUEST['order'])) :
+			if($_REQUEST['orderby'] == 'dayOfWeek') :
+				$sql .= sprintf(' ORDER BY `dayOfWeek` %1$s, `hour` %1$s, `minute` %1$s', $_REQUEST['order']);
+			else :
+				$sql .= sprintf(' ORDER BY `%s` %s', $_REQUEST['orderby'], $_REQUEST['order']);
+			endif;
+		endif;
+		$data = $wpdb->get_results($sql);
 
 
 		/**
@@ -271,7 +282,7 @@ if (!function_exists('kei_mass_render_list_page')) {
 		if($MassListTable->current_action() == 'add' || $MassListTable->current_action() == 'edit') :
 			?>
 			<div class="wrap">
-					<h2><?php _e('Edit mass', 'kei-parish'); ?> <?php if($MassListTable->current_action() == 'edit') { echo '<a href="admin.php?page=' . $_REQUEST['page'] . '&action=add" class="add-new-h2">' . __('New mass', 'kei-parish') . '</a>'; } ?></h2>
+					<h2><?php if($MassListTable->current_action() == 'edit') { _e('Edit mass', 'kei-parish'); echo '<a href="admin.php?page=' . $_REQUEST['page'] . '&action=add" class="add-new-h2">' . __('New church', 'kei-parish') . '</a>'; } else { _e('Add mass', 'kei-parish'); } ?></h2>
 			<?php
 			$data = null;
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') :
@@ -413,7 +424,7 @@ if (!function_exists('kei_mass_render_list_page')) {
 	?>
 		<div class="wrap">
 
-			<h2><?php _e('Masses', 'kei-parish') ?> <a href="admin.php?page=<?php echo $_REQUEST['page']; ?>&action=add" class="add-new-h2"><?php _e('New mass', 'kei-parish') ?></a></h2>
+			<h2><?php echo esc_html( get_admin_page_title() ); ?> <a href="admin.php?page=<?php echo $_REQUEST['page']; ?>&action=add" class="add-new-h2"><?php _e('New mass', 'kei-parish') ?></a></h2>
 
 			<div style="background:#ECECEC;border:1px solid #CCC;padding:0 10px;margin-top:5px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;">
 				<p></p>

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Kerk en IT Parish\n"
-"POT-Creation-Date: 2015-03-13 14:15+0100\n"
-"PO-Revision-Date: 2015-03-13 14:15+0100\n"
+"POT-Creation-Date: 2015-03-15 22:45+0100\n"
+"PO-Revision-Date: 2015-03-15 22:46+0100\n"
 "Last-Translator: Marco van 't Klooster <info@kerkenit.nl>\n"
 "Language-Team: Marco van 't Klooster <info@kerkenit.nl>\n"
 "Language: nl_NL\n"
@@ -23,348 +23,402 @@ msgstr ""
 msgid "No address found"
 msgstr "Geen adres gevonden"
 
-#: admin/churches.php:45 admin/massTypes.php:43 admin/masses.php:56
+#: admin/churches.php:45 admin/massTypes.php:43 admin/masses.php:58
 msgid "Edit"
 msgstr "Bewerk"
 
 #: admin/churches.php:46 admin/churches.php:89 admin/massTypes.php:44
-#: admin/massTypes.php:85 admin/masses.php:57 admin/masses.php:106
+#: admin/massTypes.php:85 admin/masses.php:59 admin/masses.php:110
 msgid "Deactivate"
 msgstr "Deactiveren"
 
 #: admin/churches.php:46 admin/churches.php:88 admin/massTypes.php:44
-#: admin/massTypes.php:84 admin/masses.php:57 admin/masses.php:105
+#: admin/massTypes.php:84 admin/masses.php:59 admin/masses.php:109
 msgid "Activate"
 msgstr "Activeren"
 
 #: admin/churches.php:47 admin/churches.php:90 admin/massTypes.php:45
-#: admin/massTypes.php:86 admin/masses.php:58 admin/masses.php:107
+#: admin/massTypes.php:86 admin/masses.php:60 admin/masses.php:111
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: admin/churches.php:69 kei-parish.php:86
+#: admin/churches.php:69 kei-parish.php:87
 msgid "Church name"
 msgstr "Kerk naam"
 
-#: admin/churches.php:70 admin/churches.php:321
+#: admin/churches.php:70 admin/churches.php:325
 msgid "Address"
 msgstr "Adres"
 
-#: admin/churches.php:71 admin/massTypes.php:68 admin/masses.php:88
+#: admin/churches.php:71 admin/massTypes.php:68 admin/masses.php:91
 msgid "Date"
 msgstr "Datum"
 
-#: admin/churches.php:257
+#: admin/churches.php:261
 msgid "Edit church"
 msgstr "Kerk bewerken"
 
-#: admin/churches.php:257 admin/churches.php:434
+#: admin/churches.php:261 admin/churches.php:438 admin/masses.php:285
 msgid "New church"
 msgstr "Nieuwe kerk"
 
-#: admin/churches.php:278
+#: admin/churches.php:261
+msgid "Add church"
+msgstr "Kerk toevoegen"
+
+#: admin/churches.php:282
 msgid "Church not added."
 msgstr "Kerk is niet toegevoegd."
 
-#: admin/churches.php:278
+#: admin/churches.php:282
 msgid "Church not changed."
 msgstr "Kerk is niet bijgewerkt."
 
-#: admin/churches.php:286
+#: admin/churches.php:290
 msgid "Church is added."
 msgstr "Kerk is toegevoegd."
 
-#: admin/churches.php:293
+#: admin/churches.php:297
 msgid "Church is changed."
 msgstr "Kerk is bijgewerkt."
 
-#: admin/churches.php:315 admin/masses.php:86 admin/masses.php:320
+#: admin/churches.php:319 admin/masses.php:88 admin/masses.php:331
 msgid "Church"
 msgstr "Kerk"
 
-#: admin/churches.php:327
+#: admin/churches.php:331
 msgid "Zipcode"
 msgstr "Postcode"
 
-#: admin/churches.php:331
+#: admin/churches.php:335
 msgid "City"
 msgstr "Plaats"
 
-#: admin/churches.php:337
+#: admin/churches.php:341
 msgid "Diocese"
 msgstr "Bisdom"
 
-#: admin/churches.php:375
+#: admin/churches.php:379
 msgid "Country"
 msgstr "Land"
 
-#: admin/churches.php:378
+#: admin/churches.php:382
 msgid "Netherlands"
 msgstr "Nederland"
 
-#: admin/churches.php:383
+#: admin/churches.php:387
 msgid "Enter Address, then fetch coordinates"
 msgstr "Voer adres in en klik hier om coördinaten op te halen"
 
-#: admin/churches.php:385
+#: admin/churches.php:389
 msgid "Latitude"
 msgstr "Latitude"
 
-#: admin/churches.php:387
+#: admin/churches.php:391
 msgid "Longitude"
 msgstr "Longitude"
 
-#: admin/churches.php:394
+#: admin/churches.php:398
 msgid "Phone"
 msgstr "Telefoon"
 
-#: admin/churches.php:400
+#: admin/churches.php:404
 msgid "Email"
 msgstr "E-mail"
 
-#: admin/churches.php:419 admin/massTypes.php:317
+#: admin/churches.php:423 admin/dashboard.php:49 admin/massTypes.php:321
 msgid "Save"
 msgstr "Opslaan"
 
-#: admin/churches.php:419 admin/massTypes.php:317 admin/masses.php:401
+#: admin/churches.php:423 admin/dashboard.php:49 admin/massTypes.php:321
+#: admin/masses.php:412
 msgid "Save Changes"
 msgstr "Wijzigingen opslaan"
 
-#: admin/churches.php:421 admin/massTypes.php:319 admin/masses.php:403
+#: admin/churches.php:425 admin/dashboard.php:51 admin/massTypes.php:323
+#: admin/masses.php:414
 msgid "Reset"
 msgstr "Ongedaan maken"
 
-#: admin/churches.php:434 kei-parish.php:214
-msgid "Churches"
-msgstr "Kerkgebouwen"
+#: admin/dashboard.php:28
+msgid "Target Audience"
+msgstr "Doelgroep"
 
-#: admin/massTypes.php:67 admin/massTypes.php:302 admin/masses.php:87
-#: admin/masses.php:334
+#: admin/dashboard.php:33
+msgid "Parishioners"
+msgstr "Parochianen"
+
+#: admin/dashboard.php:34
+msgid "Evangelization"
+msgstr "Evangelisatie"
+
+#: admin/dashboard.php:35
+msgid "Parishioners and Evangelization"
+msgstr "Parochianen en Evangelisatie"
+
+#: admin/massTypes.php:67 admin/massTypes.php:306 admin/masses.php:89
+#: admin/masses.php:345
 msgid "Mass type"
 msgstr "Mis soort"
 
-#: admin/massTypes.php:253
-msgid "Edit mass type"
-msgstr "Bewerk mis soort"
-
-#: admin/massTypes.php:253 admin/massTypes.php:332
+#: admin/massTypes.php:257 admin/massTypes.php:336
 msgid "New mass type"
 msgstr "Nieuwe mis soort"
 
-#: admin/massTypes.php:266
+#: admin/massTypes.php:270
 msgid "Mass type not added."
 msgstr "Mis soort is niet toegevoegd."
 
-#: admin/massTypes.php:266
+#: admin/massTypes.php:270
 msgid "Mass type not changed."
 msgstr "Mis soort is niet bijgewerkt."
 
-#: admin/massTypes.php:274
+#: admin/massTypes.php:278
 msgid "Mass type is added."
 msgstr "Mis soort is toegevoegd."
 
-#: admin/massTypes.php:281
+#: admin/massTypes.php:285
 msgid "Mass type is changed."
 msgstr "Mis soort is bijgewerkt."
 
-#: admin/massTypes.php:308
+#: admin/massTypes.php:312
 msgid "activeWidget"
 msgstr ""
 
-#: admin/massTypes.php:332
-msgid "Mass Types"
-msgstr "Mis Soorten"
+#: admin/masses.php:46 shortcode.php:47 shortcodes/upcoming_mass.php:55
+msgid "at"
+msgstr "om"
 
-#: admin/masses.php:274
+#: admin/masses.php:90
+msgid "Mass time"
+msgstr "Mis tijd"
+
+#: admin/masses.php:285
 msgid "Edit mass"
 msgstr "Bewerk mis"
 
-#: admin/masses.php:274 admin/masses.php:416
-msgid "New mass"
-msgstr "Nieuwe mis"
+#: admin/masses.php:285
+msgid "Add mass"
+msgstr "Mis toevoegen"
 
-#: admin/masses.php:292
+#: admin/masses.php:303
 msgid "Mass is added."
 msgstr "Mis is toegevoegd."
 
-#: admin/masses.php:299
+#: admin/masses.php:310
 msgid "Mass is changed."
 msgstr "Mis is bijgewerkt."
 
-#: admin/masses.php:348
+#: admin/masses.php:359
 msgid "Day of week"
 msgstr "Dag van de week"
 
-#: admin/masses.php:354
+#: admin/masses.php:365
 msgid "Monday"
 msgstr "Maandag"
 
-#: admin/masses.php:355
+#: admin/masses.php:366
 msgid "Thuesday"
 msgstr "Dinsdag"
 
-#: admin/masses.php:356
+#: admin/masses.php:367
 msgid "Wednesday"
 msgstr "Woensdag"
 
-#: admin/masses.php:357
+#: admin/masses.php:368
 msgid "Thursday"
 msgstr "Donderdag"
 
-#: admin/masses.php:358
+#: admin/masses.php:369
 msgid "Friday"
 msgstr "Vrijdag"
 
-#: admin/masses.php:359
+#: admin/masses.php:370
 msgid "Saturday"
 msgstr "Zaterdag"
 
-#: admin/masses.php:360
+#: admin/masses.php:371
 msgid "Sunday"
 msgstr "Zondag"
 
-#: admin/masses.php:371
+#: admin/masses.php:382
 msgid "Time"
 msgstr "Tijd"
 
-#: admin/masses.php:392
+#: admin/masses.php:403
 msgid "note"
 msgstr "Aantekeningen"
 
-#: admin/masses.php:401
+#: admin/masses.php:412
 msgid "Save as new"
 msgstr "Opslaan als nieuw"
 
-#: admin/masses.php:416 kei-parish.php:215
-msgid "Masses"
-msgstr "Missen"
+#: admin/masses.php:427
+msgid "New mass"
+msgstr "Nieuwe mis"
 
-#: functions.php:104
+#: functions.php:105
 msgid "monday"
 msgstr "maandag"
 
-#: functions.php:106
+#: functions.php:107
 msgid "tuesday"
 msgstr "dinsdag"
 
-#: functions.php:108
+#: functions.php:109
 msgid "wednesday"
 msgstr "woensdag"
 
-#: functions.php:110
+#: functions.php:111
 msgid "thursday"
 msgstr "donderdag"
 
-#: functions.php:112
+#: functions.php:113
 msgid "friday"
 msgstr "vrijdag"
 
-#: functions.php:114
+#: functions.php:115
 msgid "saturday"
 msgstr "zaterdag"
 
-#: functions.php:116
+#: functions.php:117
 msgid "sunday"
 msgstr "zondag"
 
-#: kei-parish.php:87
+#: functions.php:128
+msgid "mondays"
+msgstr "maandags"
+
+#: functions.php:130
+msgid "tuesdays"
+msgstr "dinsdags"
+
+#: functions.php:132
+msgid "wednesdays"
+msgstr "woensdags"
+
+#: functions.php:134
+msgid "thursdays"
+msgstr "donderdags"
+
+#: functions.php:136
+msgid "fridays"
+msgstr "vrijdags"
+
+#: functions.php:138
+msgid "saturdays"
+msgstr "zaterdags"
+
+#: functions.php:140
+msgid "sundays"
+msgstr "zondags"
+
+#: kei-parish.php:88
 msgid "Address of the church"
 msgstr "Adres van de kerk"
 
-#: kei-parish.php:88
+#: kei-parish.php:89
 msgid "Postalcode of the church"
 msgstr "Postcode van de kerk"
 
-#: kei-parish.php:89
+#: kei-parish.php:90
 msgid "Place of the church"
 msgstr "Plaats van de kerk"
 
-#: kei-parish.php:90
+#: kei-parish.php:91
 msgid "Diocese of the parish"
 msgstr "Bisdom van de parochie"
 
-#: kei-parish.php:91
+#: kei-parish.php:92
 msgid "Country of the parish"
 msgstr "Land van de parochie"
 
-#: kei-parish.php:92
+#: kei-parish.php:93
 msgid ""
 "Geographic coordinate that specifies the north-south position of the church"
 msgstr ""
 "Geografische coördinaten die de de noord-zuid positie van de kerk "
 "specificeren"
 
-#: kei-parish.php:93
+#: kei-parish.php:94
 msgid ""
 "Geographic coordinate that specifies the east-west position of the church"
 msgstr ""
 "Geografische coördinaten die de de oost-west positie van de kerk specificeren"
 
-#: kei-parish.php:94
+#: kei-parish.php:95
 msgid "E-mail to reach the administration of this church"
 msgstr "E-mail om de administratie van deze kerk te bereiken"
 
-#: kei-parish.php:95
+#: kei-parish.php:96
 msgid "Telephone to reach the administration of this church"
 msgstr "Telefoonnummer om de administratie van deze kerk te bereiken"
 
-#: kei-parish.php:96
+#: kei-parish.php:97
 msgid "Church is active"
 msgstr "Kerk is actief"
 
-#: kei-parish.php:104
+#: kei-parish.php:105
 msgid "Type of mass"
 msgstr "Type van de mis"
 
-#: kei-parish.php:105
+#: kei-parish.php:106
 msgid "Mass type is active"
 msgstr "Mis type is actief"
 
-#: kei-parish.php:106
+#: kei-parish.php:107
 msgid "Mass type is active in the widgets"
 msgstr "Miss type is actie in de widgets"
 
-#: kei-parish.php:114
+#: kei-parish.php:115
 msgid "Name of diocese"
 msgstr "Naam van het bisdom"
 
-#: kei-parish.php:115
+#: kei-parish.php:116
 msgid "Language code"
 msgstr "Taalcodes"
 
-#: kei-parish.php:130
+#: kei-parish.php:131
 msgid "Mass is active"
 msgstr "Mis is actief"
 
-#: kei-parish.php:158
+#: kei-parish.php:159
 msgid "Stille mis"
 msgstr ""
 
-#: kei-parish.php:159
+#: kei-parish.php:160
 msgid "Gezongen mis"
 msgstr ""
 
-#: kei-parish.php:160
+#: kei-parish.php:161
 msgid "Hoogmis"
 msgstr ""
 
-#: kei-parish.php:161
+#: kei-parish.php:162
 msgid "Plechtige Mis"
 msgstr ""
 
-#: kei-parish.php:162
+#: kei-parish.php:163
 msgid "Pontificale Mis"
 msgstr ""
 
-#: kei-parish.php:163
+#: kei-parish.php:164
 msgid "Eucharistische aanbidding"
 msgstr ""
 
-#: kei-parish.php:212
+#: kei-parish.php:213
 msgid "Parish"
 msgstr "Parochie"
 
+#: kei-parish.php:215
+msgid "Churches"
+msgstr "Kerkgebouwen"
+
 #: kei-parish.php:216
+msgid "Masses"
+msgstr "Missen"
+
+#: kei-parish.php:217
 msgid "Mass types"
 msgstr "Mis soorten"
 
@@ -372,9 +426,13 @@ msgstr "Mis soorten"
 msgid "Every"
 msgstr "Elke"
 
-#: shortcode.php:47
-msgid "at"
-msgstr "om"
+#: shortcodes/upcoming_mass.php:53
+msgid "Today"
+msgstr "Vandaag"
+
+#: shortcodes/upcoming_mass.php:53
+msgid "Upcoming"
+msgstr "Aanstaande"
 
 #: widget.php:13
 msgid ""
@@ -392,21 +450,46 @@ msgstr "Alle Missen"
 msgid "Masses times"
 msgstr "Mis tijden"
 
-#: widget.php:62
+#: widget.php:62 widgets/upcoming_mass.php:62
 msgid "Title:"
 msgstr "Titel:"
 
-#: widget.php:66
+#: widget.php:66 widgets/upcoming_mass.php:66
 msgid "Subtitle:"
 msgstr "Ondertitel:"
 
-#: widget.php:70
+#: widget.php:70 widgets/upcoming_mass.php:70
 msgid "Church:"
 msgstr "Kerk:"
 
-#: widget.php:74
+#: widget.php:74 widgets/upcoming_mass.php:74
 msgid "All churches:"
 msgstr "Alle Kerkgebouwen:"
+
+#: widgets/upcoming_mass.php:13
+msgid ""
+"This widget will show the upcoming mass times. This is recommended if your "
+"primary target audience are seekers to faith."
+msgstr ""
+"Deze widget toont de aanstaande mistijden. Dit wordt aanbevolen als je "
+"primaire doelgroep de zoekers naar geloof."
+
+#: widgets/upcoming_mass.php:16
+msgid "Upcoming Masses"
+msgstr "Volgende missen"
+
+#: widgets/upcoming_mass.php:57
+msgid "Next Masses"
+msgstr "Volgende Missen"
+
+#~ msgid "Both"
+#~ msgstr "Beide"
+
+#~ msgid "Edit mass type"
+#~ msgstr "Bewerk mis soort"
+
+#~ msgid "Mass Types"
+#~ msgstr "Mis Soorten"
 
 #~ msgid "Hour"
 #~ msgstr "Uur"

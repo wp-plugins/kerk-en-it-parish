@@ -68,9 +68,10 @@
 			ob_end_flush();
 		}
 	}
-
-	add_action('init', 'add_ob_start');
-	add_action('wp_footer', 'flush_ob_end');
+	if(is_admin()) :
+		add_action('init', 'add_ob_start');
+		add_action('wp_footer', 'flush_ob_end');
+	endif;
 
 	/**
 	*	powered by @cafewebmaster.com
@@ -114,6 +115,29 @@
 					return __('saturday', 'kei-parish');
 				case 7:
 					return __('sunday', 'kei-parish');
+				default:
+					return '';
+			}
+		}
+	}
+
+	if (!function_exists('getDayOfWeekPlural')) {
+		function getDayOfWeekPlural($i) {
+			switch($i) {
+				case 1:
+					return __('mondays', 'kei-parish');
+				case 2:
+					return __('tuesdays', 'kei-parish');
+				case 3:
+					return __('wednesdays', 'kei-parish');
+				case 4:
+					return __('thursdays', 'kei-parish');
+				case 5:
+					return __('fridays', 'kei-parish');
+				case 6:
+					return __('saturdays', 'kei-parish');
+				case 7:
+					return __('sundays', 'kei-parish');
 				default:
 					return '';
 			}

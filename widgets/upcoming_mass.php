@@ -2,7 +2,7 @@
 /**
  * Adds Kei_MassTimes_Widget widget.
  */
-class Kei_AllMassTimes_Widget extends WP_Widget {
+class Kei_UpcommingMassTimes_Widget extends WP_Widget {
 
 	/**
 	 * Register widget with WordPress.
@@ -10,10 +10,10 @@ class Kei_AllMassTimes_Widget extends WP_Widget {
 	function __construct() {
 
 		load_plugin_textdomain( 'kei-parish', false, KEI_LANG);
-		$widget_ops = array('classname' => 'kei_widget_masses', 'description' => __( 'This widget will show all mass times. This is recommended if your primary target audience are the parishioners.', 'kei-parish' ));
+		$widget_ops = array('classname' => 'kei_widget_masses kei_upcoming_masses', 'description' => __( 'This widget will show the upcoming mass times. This is recommended if your primary target audience are seekers to faith.', 'kei-parish' ));
         parent::__construct(
-        	'kei_widget_masses', // Base ID
-        	__( 'All Masses', 'kei-parish' ), // Name
+        	'kei_widget_upcoming_masses', // Base ID
+        	__( 'Upcoming Masses', 'kei-parish' ), // Name
         	$widget_ops // Args
         );
 	}
@@ -37,9 +37,9 @@ class Kei_AllMassTimes_Widget extends WP_Widget {
 			$subtitle = sprintf(' subtitle="%s"', $instance['subtitle']);
 		endif;
 		if(isset($instance['church_ID']) && !empty($instance['church_ID']) && is_numeric($instance['church_ID'])) :
-			echo do_shortcode( '[parish-all-masses church_id="' . $instance['church_ID'] . '"' . $subtitle . ']' );
+			echo do_shortcode( '[parish-upcoming-masses church_id="' . $instance['church_ID'] . '"' . $subtitle . ']' );
 		else :
-			echo do_shortcode( '[parish-all-masses' . $subtitle . ']' );
+			echo do_shortcode( '[parish-upcoming-masses' . $subtitle . ']' );
 		endif;
 
 		echo $args['after_widget'];
@@ -54,7 +54,7 @@ class Kei_AllMassTimes_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		global $wpdb;
-		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Masses times', 'kei-parish' );
+		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Next Masses', 'kei-parish' );
 		$subtitle = ! empty( $instance['subtitle'] ) ? $instance['subtitle'] : '';
 		$church_ID = ! empty( $instance['church_ID'] ) ? $instance['church_ID'] : 0;
 		?>
@@ -100,6 +100,6 @@ class Kei_AllMassTimes_Widget extends WP_Widget {
 		return $instance;
 	}
 
-} // class Kei_MassTimes_Widget
+} // class Kei_UpcommingMassTimes_Widget
 
 ?>

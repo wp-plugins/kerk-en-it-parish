@@ -189,7 +189,11 @@ class KEI_MassTypes_Table extends WP_List_Table {
 		$this->process_bulk_action();
 
 
-		$data = $wpdb->get_results("SELECT ID, `title`, IFNULL(`updatedate`,`insertdate`) AS date, `active` FROM `" . $this->table_name . "`");
+		$sql = "SELECT ID, `title`, IFNULL(`updatedate`,`insertdate`) AS date, `active` FROM `" . $this->table_name . "`";
+		if(isset($_REQUEST['orderby']) && isset($_REQUEST['order'])) :
+			$sql .= sprintf(' ORDER BY `%s` %s', $_REQUEST['orderby'], $_REQUEST['order']);
+		endif;
+		$data = $wpdb->get_results($sql);
 
 
 		/**
@@ -250,7 +254,7 @@ if (!function_exists('kei_masstype_render_list_page')) {
 		if($MassTypeListTable->current_action() == 'add' || $MassTypeListTable->current_action() == 'edit') :
 			?>
 			<div class="wrap">
-					<h2><?php _e('Edit mass type', 'kei-parish'); ?> <?php if($MassTypeListTable->current_action() == 'edit') { echo '<a href="admin.php?page=' . $_REQUEST['page'] . '&action=add" class="add-new-h2">' . __('New mass type', 'kei-parish') . '</a>'; } ?></h2>
+					<h2><?php echo esc_html( get_admin_page_title() ); ?> <?php if($MassTypeListTable->current_action() == 'edit') { echo '<a href="admin.php?page=' . $_REQUEST['page'] . '&action=add" class="add-new-h2">' . __('New mass type', 'kei-parish') . '</a>'; } ?></h2>
 			<?php
 			$data = null;
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') :
@@ -329,7 +333,7 @@ if (!function_exists('kei_masstype_render_list_page')) {
 	?>
 		<div class="wrap">
 
-			<h2><?php _e('Mass Types', 'kei-parish') ?> <a href="admin.php?page=<?php echo $_REQUEST['page']; ?>&action=add" class="add-new-h2"><?php _e('New mass type', 'kei-parish') ?></a></h2>
+			<h2><?php echo esc_html( get_admin_page_title() ); ?> <a href="admin.php?page=<?php echo $_REQUEST['page']; ?>&action=add" class="add-new-h2"><?php _e('New mass type', 'kei-parish') ?></a></h2>
 
 			<div style="background:#ECECEC;border:1px solid #CCC;padding:0 10px;margin-top:5px;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;">
 				<p></p>

@@ -63,6 +63,9 @@ Also we are looking for translators. Please [contact us](http://www.kerkenit.nl/
 * Improved all masses widget/shortcode when the are multiple masses on the same day in the same church.
 * Redesigned and improved the admin form for adding masses.
 * Added subtitle to all masses widget/shortcode
+* Added widget/shortcode for upcoming masses
+* Added new translations
+* Added ordering in data tables
 
 = 0.2.1 =
 
