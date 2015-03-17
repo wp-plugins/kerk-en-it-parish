@@ -218,10 +218,12 @@ if (!function_exists('kei_add_menu_items')) {
 
 	}
 }
-require_once( dirname( KEI_FILE) . '/shortcode.php' );
-require_once( dirname( KEI_FILE) . '/widget.php' );
-require_once( dirname( KEI_FILE) . '/shortcodes/upcoming_mass.php' );
-require_once( dirname( KEI_FILE) . '/widgets/upcoming_mass.php' );
+
+$widgets = array('all_masses', 'upcoming_mass');
+foreach($widgets as $widget) {
+	require_once( dirname( KEI_FILE) . '/shortcodes/' . $widget . '.php' );
+	require_once( dirname( KEI_FILE) . '/widgets/' . $widget . '.php' );
+}
 
 if (!function_exists('kei_init')) {
 	function kei_init() {
