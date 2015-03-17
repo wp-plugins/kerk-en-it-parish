@@ -59,13 +59,14 @@ Also we are looking for translators. Please [contact us](http://www.kerkenit.nl/
 
 = 0.3.0 =
 
-* Moved widget to shortcode with same functionality. All masses are available in both widget and shortcode.
-* Improved all masses widget/shortcode when the are multiple masses on the same day in the same church.
+* Moved widget to shortcode with same functionality. All widgets are available as widget and shortcode.
+* Improved all masses widget when the are multiple masses on the same day in the same church.
 * Redesigned and improved the admin form for adding masses.
-* Added subtitle to all masses widget/shortcode
-* Added widget/shortcode for upcoming masses
+* Added subtitle to all masses widget
+* Added widget for upcoming masses
 * Added new translations
 * Added ordering in data tables
+* Added Google Maps widget
 
 = 0.2.1 =
 

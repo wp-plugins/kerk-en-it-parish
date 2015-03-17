@@ -219,7 +219,7 @@ if (!function_exists('kei_add_menu_items')) {
 	}
 }
 
-$widgets = array('all_masses', 'upcoming_mass');
+$widgets = array('all_masses', 'upcoming_mass', 'maps');
 foreach($widgets as $widget) {
 	require_once( dirname( KEI_FILE) . '/shortcodes/' . $widget . '.php' );
 	require_once( dirname( KEI_FILE) . '/widgets/' . $widget . '.php' );
@@ -237,6 +237,8 @@ if (!function_exists('kei_init')) {
 function register_kei_parish_widgets() {
     register_widget( 'Kei_AllMassTimes_Widget' );
     register_widget( 'Kei_UpcommingMassTimes_Widget' );
+    register_widget( 'Kei_Maps_Widget' );
+    
 }
 
 add_action('init', 'kei_init');
